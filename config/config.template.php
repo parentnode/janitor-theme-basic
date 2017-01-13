@@ -38,12 +38,7 @@ define("SITE_ITEMS", true);
 // Enable notifications (send collection email after N notifications)
 define("SITE_COLLECT_NOTIFICATIONS", 50);
 
-
-
-// Enable notifications (send collection email after N notifications)
-define("SITE_COLLECT_NOTIFICATIONS", 50);
-
-// INSTALL MODE
+// INSTALL MODE (DISABLES ALL SECURITY)
 //define("SITE_INSTALL", true);
 
 ?>
