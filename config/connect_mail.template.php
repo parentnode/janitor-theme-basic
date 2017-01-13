@@ -13,7 +13,7 @@ $this->mail_connection(
 		"port" => "###PORT###", 
 		"username" => "###USERNAME###", 
 		"password" => "###PASSWORD###", 
-		"secure" => "ssl", 
+		"secure" => "tls", 
 		"smtpauth" => true
 	)
 );
