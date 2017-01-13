@@ -19,7 +19,7 @@ define("SITE_EMAIL", "###SITE_EMAIL###");
 /**
 * Optional constants
 */
-define("DEFAULT_PAGE_DESCRIPTION", "");
+define("DEFAULT_PAGE_DESCRIPTION", "###DEFAULT_PAGE_DESCRIPTION###");
 define("DEFAULT_LANGUAGE_ISO", "EN"); // Reginal language English
 define("DEFAULT_COUNTRY_ISO", "DK"); // Regional country Denmark
 
