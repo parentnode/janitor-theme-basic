@@ -3,6 +3,7 @@ Util.Objects["page"] = new function() {
 
 		// header reference
 		page.hN = u.qs("#header");
+		page.hN.service = u.qs("ul.servicenavigation", page.hN);
 
 		// content reference
 		page.cN = u.qs("#content", page);
@@ -13,6 +14,7 @@ Util.Objects["page"] = new function() {
 
 		// footer reference
 		page.fN = u.qs("#footer");
+		page.fN.service = u.qs("ul.servicenavigation", page.fN);
 
 
 		// global resize handler 
@@ -61,6 +63,16 @@ Util.Objects["page"] = new function() {
 			if(frontpage_link) {
 				var logo = u.ae(this.hN, "a", {"class":"logo", "href":frontpage_link.href, "html":frontpage_link.innerHTML});
 				u.ce(logo, {"type":"link"});
+			}
+
+			// insert footer servicenavigation into header servicenavigation
+			if(this.fN.service) {
+				var node, i;
+				var nodes = u.qsa("li", this.fN.service);
+				for(i = 0; node = nodes[i]; i++) {
+					u.ie(this.hN.service, node);
+				}
+				this.fN.removeChild(this.fN.service);
 			}
 		}
 

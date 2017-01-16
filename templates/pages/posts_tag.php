@@ -1,97 +1,91 @@
 <?php
 global $action;
+global $IC;
+global $itemtype;
 
+$selected_tag = urldecode($action[1]);
+$items = $IC->getItems(array("itemtype" => $itemtype, "status" => 1, "tags" => $itemtype.":".addslashes($selected_tag), "extend" => array("tags" => true, "user" => true, "mediae" => true)));
 
-$IC = new Items();
-$itemtype = "post";
-$tag = urldecode($action[1]);
-
-// get tags for filters
-$categories = $IC->getTags(array("context" => $itemtype));
-
-
-// get content pagination
-$limit = stringOr(getVar("limit"), 6);
-$sindex = isset($action[2]) ? $action[2] : false;
-$direction = isset($action[3]) ? $action[3] : false; 
-
-$pattern = array("itemtype" => $itemtype, "status" => 1, "tags" => $itemtype.":".addslashes($tag), "order" => "published_at DESC", "extend" => array("tags" => true, "user" => true, "mediae" => true));
-$pagination = $IC->paginate(array("pattern" => $pattern, "sindex" => $sindex, "limit" => $limit, "direction" => $direction));
+$categories = $IC->getTags(array("context" => $itemtype, "order" => "value"));
 
 ?>
 
-<div class="scene posts tag i:generic">
-	<h1><?= $tag ?></h1>
+<div class="scene posts tag i:scene">
+	<h1>Posts</h1>
+	<h2><?= $selected_tag ?></h2>
 
-<?	if($pagination["range_items"]): ?>
-
-	<ul class="items postings">
-<?		foreach($pagination["range_items"] as $item):
-			$media = $IC->sliceMedia($item); ?>
-		<li class="item post id:<?= $item["item_id"] ?>" itemscope itemtype="http://schema.org/Article">
-
-<?			if($media): ?>
-			<div class="image image_id:<?= $item["item_id"] ?> format:<?= $media["format"] ?> variant:<?= $media["variant"] ?>"></div>
-<?			endif; ?>
-
-			<ul class="tags">
-				<li><a href="/">Posts</a></li>
-<?			if($item["tags"]): ?>
-<?				foreach($item["tags"] as $item_tag): ?>
-<?	 				if($item_tag["context"] == $itemtype): ?>
-				<li><a href="/index/tag/<?= urlencode($item_tag["value"]) ?>" itemprop="articleSection"><?= $item_tag["value"] ?></a></li>
-<?					endif; ?>
-<?				endforeach; ?>
-<?			endif; ?>
-			</ul>
-			<h2 itemprop="name"><?= $item["name"] ?></h2>
-
-			<dl class="info">
-				<dt class="published_at">Date published</dt>
-				<dd class="published_at" itemprop="datePublished" content="2015-07-27"><?= date("Y-m-d, H:i", strtotime($item["published_at"])) ?></dd>
-				<dt class="author">Author</dt>
-				<dd class="author" itemprop="author"><?= $item["user_nickname"] ?></dd>
-				<dt class="hardlink">Hardlink</dt>
-				<dd class="hardlink" itemprop="url"><a href="<?= SITE_URL."/index/tag/".$tag."/".$item["sindex"] ?>" target="_blank"><?= SITE_URL."/index/tag/".$tag."/".$item["sindex"] ?></a></dd>
-			</dl>
-
-			<div class="description" itemprop="articleBody">
-				<?= $item["html"] ?>
-			</div>
-
-<?			if($item["mediae"]):
-				foreach($item["mediae"] as $media): ?>
-			<div class="image image_id:<?= $item["item_id"] ?> format:<?= $media["format"] ?> variant:<?= $media["variant"] ?>"></div>
-<? 				endforeach;
-			endif; ?>
-
-		</li>
-<?		endforeach; ?>
-	</ul>
-<? endif; ?>
-
-
-<? if($pagination["next"] || $pagination["prev"]): ?>
-	<div class="pagination">
-		<ul class="actions">
-<? if($pagination["prev"]): ?><li class="previous"><a href="/index/tag/<?= $tag ?>/<?= $pagination["first_sindex"] ?>/prev">Previous page</a></li><? endif; ?>
-<? if($pagination["next"]): ?><li class="next"><a href="/index/tag/<?= $tag ?>/<?= $pagination["last_sindex"] ?>/next">Next page</a></li><? endif; ?>
+<? if($categories): ?>
+	<div class="categories">
+		<ul class="tags">
+			<li><a href="/posts">All posts</a></li>
+		<? foreach($categories as $tag): ?>
+			<li<?= ($selected_tag == $tag["value"] ? ' class="selected"' : '') ?>><a href="/posts/tag/<?= urlencode($tag["value"]) ?>"><?= $tag["value"] ?></a></li>
+			<? endforeach; ?>
 		</ul>
 	</div>
 <? endif; ?>
 
 
-<?	if($categories): ?>
-	<h2>Categories</h2>
-	<ul class="tags">
-<?		foreach($categories as $tag): ?>
-		<li><a href="/index/tag/<?= urlencode($tag["value"]) ?>"><?= $tag["value"] ?></a></li>
-<?		endforeach; ?>
-	</ul>
-<?	endif; ?>
+<?	if($items): ?>
+	<ul class="items articles">
+		<? foreach($items as $item):
+			$media = $IC->sliceMedia($item); ?>
+		<li class="item article id:<?= $item["item_id"] ?>" itemscope itemtype="http://schema.org/NewsArticle">
 
-	<ul class="actions">
-		<li class="more"><a href="/index">All postings</a></li>
+
+			<ul class="tags">
+				<li><a href="/posts">Posts</a></li>
+				<? if($item["tags"]): ?>
+					<? foreach($item["tags"] as $item_tag): ?>
+						<? if($item_tag["context"] == $itemtype): ?>
+				<li><a href="/posts/tag/<?= urlencode($item_tag["value"]) ?>" itemprop="articleSection"><?= $item_tag["value"] ?></a></li>
+						<? endif; ?>
+					<? endforeach; ?>
+				<? endif; ?>
+			</ul>
+
+
+			<h3 itemprop="headline"><a href="/posts/<?= $item["sindex"] ?>"><?= $item["name"] ?></a></h3>
+
+
+			<ul class="info">
+				<li class="published_at" itemprop="datePublished" content="<?= date("Y-m-d", strtotime($item["published_at"])) ?>"><?= date("Y-m-d, H:i", strtotime($item["published_at"])) ?></li>
+				<li class="modified_at" itemprop="dateModified" content="<?= date("Y-m-d", strtotime($item["modified_at"])) ?>"></li>
+				<li class="author" itemprop="author"><?= $item["user_nickname"] ?></li>
+				<li class="main_entity share" itemprop="mainEntityOfPage" content="<?= SITE_URL ?>/posts/<?= $item["sindex"] ?>"></li>
+				<li class="publisher" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+					<ul class="publisher_info">
+						<li class="name" itemprop="name" content="parentnode.dk"></li>
+						<li class="logo" itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+							<span class="image_url" itemprop="url" content="<?= SITE_URL ?>/img/logo-large.png"></span>
+							<span class="image_width" itemprop="width" content="720"></span>
+							<span class="image_height" itemprop="height" content="405"></span>
+						</li>
+					</ul>
+				</li>
+				<li class="image_info" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+					<span class="image_url" itemprop="url" content="<?= SITE_URL ?>/img/logo-large.png"></span>
+					<span class="image_width" itemprop="width" content="720"></span>
+					<span class="image_height" itemprop="height" content="405"></span>
+				</li>
+			</ul>
+
+
+			<? if($item["description"]): ?>
+			<div class="description" itemprop="description">
+				<p><?= nl2br($item["description"]) ?></p>
+			</div>
+			<? endif; ?>
+
+		</li>
+		<? endforeach; ?>
 	</ul>
+
+<? else: ?>
+
+	<h2>Technology needs humanity.</h2>
+	<p>We could not find any posts with the selected tag.</p>
+
+<? endif; ?>
 
 </div>
