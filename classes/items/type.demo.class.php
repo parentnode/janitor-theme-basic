@@ -44,22 +44,6 @@ class TypeDemo extends Itemtype {
 			"error_message" => "HTML must be HTML"
 		));
 
-		$this->addToModel("tag", array(
-			"type" => "tag",
-			"label" => "Tag",
-			"required" => true,
-			"hint_message" => "Type tag",
-			"error_message" => "Tag must be valid tag"
-		));
-
-		$this->addToModel("file", array(
-			"type" => "files",
-			"label" => "Files",
-			"required" => true,
-			"hint_message" => "Type files",
-			"error_message" => "Files must be added"
-		));
-
 	}
 
 }
