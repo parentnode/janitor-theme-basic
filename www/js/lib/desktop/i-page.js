@@ -22,8 +22,8 @@ Util.Objects["page"] = new function() {
 //			u.bug("page.resized:" + u.nodeId(this));
 
 			// forward scroll event to current scene
-			if(page.cN && page.cN.scene && typeof(page.cN.scene.resized) == "function") {
-				page.cN.scene.resized();
+			if(this.cN && this.cN.scene && typeof(this.cN.scene.resized) == "function") {
+				this.cN.scene.resized();
 			}
 		}
 
@@ -32,8 +32,8 @@ Util.Objects["page"] = new function() {
 //			u.bug("page.scrolled:" + u.nodeId(this))
 
 			// forward scroll event to current scene
-			if(page.cN && page.cN.scene && typeof(page.cN.scene.scrolled) == "function") {
-				page.cN.scene.scrolled();
+			if(this.cN && this.cN.scene && typeof(this.cN.scene.scrolled) == "function") {
+				this.cN.scene.scrolled();
 			}
 		}
 
@@ -48,9 +48,9 @@ Util.Objects["page"] = new function() {
 				this.is_ready = true;
 
 				// set resize handler
-				u.e.addEvent(window, "resize", page.resized);
+				u.e.addWindowEvent(this, "resize", this.resized);
 				// set scroll handler
-				u.e.addEvent(window, "scroll", page.scrolled);
+				u.e.addWindowEvent(this, "scroll", this.scrolled);
 
 				this.initHeader();
 			}
