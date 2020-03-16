@@ -1,3 +1,92 @@
+// set classname on element, replacing all others
+Util.setClass = u.sc = function(node, classname, dom_update) {
+
+	// save old classname
+	var old_class;
+
+	// Special case for SVGs
+	if(typeof(SVGElement) !== "undefined" && node instanceof SVGElement) {
+		old_class = node.className.baseVal;
+		node.className.baseVal = classname;
+	}
+	// HTML
+	else {
+		old_class = node.className;
+		node.className = classname;
+	}
+
+	// force dom update (performance killer, but will make rendering more detailed)
+	dom_update = (!dom_update) || (node.offsetTop);
+	
+	// return replaced classname
+	return old_class;
+}
+
+// Element has classname
+Util.hasClass = u.hc = function(node, classname) {
+
+	var regexp = new RegExp("(^|\\s)(" + classname + ")(\\s|$)");
+	// Special case for SVGs
+	if(typeof(SVGElement) !== "undefined" && node instanceof SVGElement) {
+		if(regexp.test(node.className.baseVal)) {
+			return true;
+		}
+	}
+	// HTML
+	else {
+		if(regexp.test(node.className)) {
+			return true;
+		}
+	}
+
+	// return false on error
+	return false;
+}
+
+// Add classname to element if it is not already there
+Util.addClass = u.ac = function(node, classname, dom_update) {
+
+	var regexp = new RegExp("(^|\\s)" + classname + "(\\s|$)");
+	if(typeof(SVGElement) !== "undefined" && node instanceof SVGElement) {
+		if(!regexp.test(node.className.baseVal)) {
+			node.className.baseVal += node.className.baseVal ? " " + classname : classname;
+		}
+	}
+	else {
+		if(!regexp.test(node.className)) {
+			node.className += node.className ? " " + classname : classname;
+		}
+	}
+	// force dom update (performance killer, but will make rendering more detailed)
+	dom_update = (!dom_update) || (node.offsetTop);
+
+	// return updated classname
+	return node.className;
+}
+
+// Remove all instances of classname from element
+Util.removeClass = u.rc = function(node, classname, dom_update) {
+
+	var regexp = new RegExp("(^|\\s)(" + classname + ")(?=[\\s]|$)", "g");
+
+	// Replace pattern and fix any doublespaces
+	// Special case for SVGs
+	if(typeof(SVGElement) !== "undefined" && node instanceof SVGElement) {
+		node.className.baseVal = node.className.baseVal.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
+	}
+	// HTML
+	else {
+		node.className = node.className.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
+	}
+
+	// force dom update (performance killer, but will make rendering more detailed)
+	dom_update = (!dom_update) || (node.offsetTop);
+
+	// return updated classname
+	return node.className;
+}
+
+
 if(typeof(document.defaultView) == "undefined") {
 
 	// Get elements computed style value for css attribute
@@ -49,12 +138,11 @@ if(typeof(document.defaultView) == "undefined") {
 // only punish older IEs
 if(document.all && document.addEventListener == undefined) {
 
-
 	// IE attribute bug - will not apply class unless set as node.className
 	Util.appendElement = u.ae = function(_parent, node_type, attributes) {
 		try {
 			// is node_type already DOM node
-			var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
+			var node = (obj(node_type)) ? node_type : (node_type == "svg" && typeof(SVGElement) !== "undefined" ? document.createElementNS("http://www.w3.org/2000/svg", node_type) : document.createElement(node_type));
 
 			if(attributes) {
 				var attribute;
@@ -99,14 +187,18 @@ if(document.all && document.addEventListener == undefined) {
 						var nodes, matches, n, i;
 						matches = u.getMatches(attributes["html"], new RegExp("src\=\"([^\"]+)\"", "ig") );
 						nodes = u.qsa("[src]", node);
-						for(i = 0; n = nodes[i]; i++) {
+						for(i = 0; i < nodes.length; i++) {
+							n = nodes[i];
+
 							n.src = matches[i];
 						}
 
 						// manually update href attribute to correct value
 						matches = u.getMatches(attributes["html"], new RegExp("href\=\"([^\"]+)\"", "ig") );
 						nodes = u.qsa("[href]", node);
-						for(i = 0; n = nodes[i]; i++) {
+						for(i = 0; i < nodes; i++) {
+							n = nodes[i];
+
 							n.href = matches[i];
 						}
 					}
@@ -121,12 +213,10 @@ if(document.all && document.addEventListener == undefined) {
 
 	}
 
-
-
 	// IE attribute bug - will not apply class unless set as node.className
 	Util.insertElement = u.ie = function(_parent, node_type, attributes) {
 		try {
-			var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
+			var node = (obj(node_type)) ? node_type : (node_type == "svg" && typeof(SVGElement) !== "undefined" ? document.createElementNS("http://www.w3.org/2000/svg", node_type) : document.createElement(node_type));
 
 			if(attributes) {
 				var attribute;
@@ -171,14 +261,17 @@ if(document.all && document.addEventListener == undefined) {
 						var nodes, matches, n, i;
 						matches = u.getMatches(attributes["html"], new RegExp("src\=\"([^\"]+)\"", "ig") );
 						nodes = u.qsa("[src]", node);
-						for(i = 0; n = nodes[i]; i++) {
+						for(i = 0; i < nodes.length; i++) {
+							n = nodes[i];
 							n.src = matches[i];
 						}
 
 						// manually update href attribute to correct value
 						matches = u.getMatches(attributes["html"], new RegExp("href\=\"([^\"]+)\"", "ig") );
 						nodes = u.qsa("[href]", node);
-						for(i = 0; n = nodes[i]; i++) {
+						for(i = 0; i < nodes.length; i++) {
+							n = nodes[i];
+
 							n.href = matches[i];
 						}
 					}
@@ -191,7 +284,6 @@ if(document.all && document.addEventListener == undefined) {
 			u.exception("u.ie (desktop_light)", arguments, exception);
 		}
 	}
-
 
 	// insert element in wrap-element and return wrapper
 	Util.wrapElement = u.we = function(node, node_type, attributes) {
@@ -251,6 +343,7 @@ if(document.all && document.addEventListener == undefined) {
 
 }
 
+
 // get node textcontent shorthand (basically this is not needed for newer browsers, but required to align syntax for older browsers)
 // function could be made as prototype, but IE 7+6 does not support Object.defineProperty
 if(typeof(document.textContent) == "undefined") {
@@ -270,6 +363,36 @@ if(typeof(document.textContent) == "undefined") {
 
 }
 
+
+// is node within scope - Node.contains didn't exist pre Fx 9, Ch ? 
+// Polyfill
+if(typeof(document.contains) == "undefined") {
+
+	u.contains = function(scope, node) {
+
+		if(scope != node) {
+
+			while(node != null) {
+				if(node == scope) {
+					return true;
+				}
+				node = node.parentNode;
+			}
+		}
+
+		return false;
+	}
+
+}
+
+
+
+if(!Element.prototype.matches) {
+	Element.prototype.matches = Element.prototype.matchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.msMatchesSelector || Element.prototype.oMatchesSelector || Element.prototype.webkitMatchesSelector || function(selector) {
+		var matches = (this.parentNode || this.document || this.ownerDocument).querySelectorAll(selector);
+		return u.nodeInList(this, matches);
+	};
+}
 
 
 
@@ -677,7 +800,7 @@ if(document.querySelector == undefined) {
 
 		relative: {
 			"+": function(checkSet, part){
-				var isPartStr = typeof part === "string",
+				var isPartStr = str(part),
 					isTag = isPartStr && !rNonWord.test( part ),
 					isPartStrNotTag = isPartStr && !isTag;
 
@@ -702,7 +825,7 @@ if(document.querySelector == undefined) {
 
 			">": function( checkSet, part ) {
 				var elem,
-					isPartStr = typeof part === "string",
+					isPartStr = str(part),
 					i = 0,
 					l = checkSet.length;
 
@@ -740,7 +863,7 @@ if(document.querySelector == undefined) {
 					doneName = done++,
 					checkFn = dirCheck;
 
-				if ( typeof part === "string" && !rNonWord.test( part ) ) {
+				if ( str(part) && !rNonWord.test( part ) ) {
 					part = part.toLowerCase();
 					nodeCheck = part;
 					checkFn = dirNodeCheck;
@@ -754,7 +877,7 @@ if(document.querySelector == undefined) {
 					doneName = done++,
 					checkFn = dirCheck;
 
-				if ( typeof part === "string" && !rNonWord.test( part ) ) {
+				if ( str(part) && !rNonWord.test( part ) ) {
 					part = part.toLowerCase();
 					nodeCheck = part;
 					checkFn = dirNodeCheck;

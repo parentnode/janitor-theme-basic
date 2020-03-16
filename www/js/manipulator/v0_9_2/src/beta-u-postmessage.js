@@ -27,10 +27,10 @@ u.postMessage = new function () {
 		var permanent = false;
 
 		// apply parameters
-		if (typeof (_options) == "object") {
+		if (obj(_options)) {
 			var _argument;
-			for (_argument in _options) {
-				switch (_argument) {
+			for(_argument in _options) {
+				switch(_argument) {
 					case "request_id": request_id = _options[_argument]; break;
 					case "callback": callback = _options[_argument]; break;
 					case "node": node = _options[_argument]; break;
@@ -78,34 +78,34 @@ u.postMessage = new function () {
 
 		// validate data
 		// data is string - try to convert to JSON object
-		if (typeof (event.data) == "string") {
+		if(str(event.data)) {
 			data = u.isStringJSON(event.data);
 		}
 		// data is already JSON
-		else if (typeof (event.data) == "object") {
+		else if(obj(event.data)) {
 			data = event.data;
 			data.isJSON = true;
 		}
 
 		// JSON
-		if (data.isJSON) {
+		if(data.isJSON) {
 
 //			u.bug("event.data.request_id:" + data.request_id);
 
 			// do we have listener for this request id?
-			if (this.post_message_listeners[data.RequestId]) {
+			if(this.post_message_listeners[data.RequestId]) {
 
 				// get recipient object
 				var recipient = this.post_message_listeners[data.RequestId];
 
 				// make callback
-				if (recipient.node && typeof (recipient.node[recipient.callback]) == "function") {
+				if(recipient.node && fun (recipient.node[recipient.callback])) {
 					recipient.node[recipient.callback](data);
 				}
 
 
 				// delete recipient if it is not permanent
-				if (!recipient.permanent) {
+				if(!recipient.permanent) {
 					this.removeListener(data.RequestId);
 				}
 		
@@ -115,7 +115,7 @@ u.postMessage = new function () {
 			else {
 
 				u.bug("uncaught message")
-				for (x in data) {
+				for(x in data) {
 					console.log("data[" + x + "]=" + data[x]);
 				}
 
