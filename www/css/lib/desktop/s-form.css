@@ -22,7 +22,7 @@ div.field select option {padding: 5px 3px 2px 6px;}
 /* SET BACKGROUND IMAGE FOR WEBKIT SELECTS */
 @media all and (-webkit-min-device-pixel-ratio:0) {
 	div.field select {width: 380px; height: 31px; padding: 2px 3px 2px 7px;
-		background: #ffffff url(../../../img/bg_icons.png) no-repeat 360px -977px;
+		background: #ffffff url(/janitor/admin/img/bg_icons.png) no-repeat 360px -977px;
 		-webkit-appearance: none;
 	}
 }
@@ -77,7 +77,7 @@ div.field.files label {color: #333333; font-size: 14px; display: block; position
 div.field.files ul.filelist {color: #333333; font-size: 14px; display: block; position: absolute; width: 120px; left: 50%; padding: 1px 4px 3px; margin: 16px 0 0 -60px; text-align: center; border-radius: 6px; background: #dedede;}
 
 div.field.files.loading label {display: none;}
-div.field.files.loading {background: transparent url(../../../img/gx_loader.gif) no-repeat center center;}
+div.field.files.loading {background: transparent url(/janitor/admin/img/gx_loader.gif) no-repeat center center;}
 
 
 
@@ -116,7 +116,7 @@ div.field .pseudolabel {color: #aaaaaa;}
 /* VALIDATION */
 div.field .indicator {position: absolute; top: 4px; left: 455px; width: 25px; height: 25px;}
 div.field.required .indicator {
-	background: transparent url(../../../img/bg_icons.png) no-repeat 0 -292px;
+	background: transparent url(/janitor/admin/img/bg_icons.png) no-repeat 0 -292px;
 }
 div.field.text.required .indicator {background-position: 0 -296px;}
 
@@ -183,7 +183,7 @@ ul.actions a.button,
 /* FORM IN SUBMITTING STATE */
 .submitting input[type="submit"].button {
 	padding-left: 40px !important;
-	background-image: url(../../../img/gx_loader.gif);
+	background-image: url(/janitor/admin/img/gx_loader.gif);
 	background-position: 11px 5px;
 	background-repeat: no-repeat;
 	background-size: 17px auto;
