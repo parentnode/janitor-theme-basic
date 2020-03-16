@@ -1,5 +1,5 @@
 /*
-asset-builder @ 2020-03-16 18:25:03
+asset-builder @ 2020-03-16 19:00:14
 */
 
 /*seg_smartphone_include.js*/
@@ -4522,10 +4522,12 @@ if(u.ga_account) {
 Util.Modules["page"] = new function() {
 	this.init = function(page) {
 		page.hN = u.qs("#header");
+		page.hN.service = u.qs("ul.servicenavigation", page.hN);
 		page.cN = u.qs("#content", page);
 		page.nN = u.qs("#navigation", page);
 		page.nN = u.ie(page.hN, page.nN);
 		page.fN = u.qs("#footer");
+		page.fN.service = u.qs("ul.servicenavigation", page.fN);
 		page.resized = function() {
 			if(this.cN && this.cN.scene && typeof(this.cN.scene.resized) == "function") {
 				this.cN.scene.resized();
@@ -4543,6 +4545,7 @@ Util.Modules["page"] = new function() {
 				u.e.addWindowEvent(this, "resize", this.resized);
 				u.e.addWindowEvent(this, "scroll", this.scrolled);
 				this.initHeader();
+				this.initNavigation();
 			}
 		}
 		page.initHeader = function() {
@@ -4550,6 +4553,80 @@ Util.Modules["page"] = new function() {
 			if(frontpage_link) {
 				var logo = u.ae(this.hN, "a", {"class":"logo", "href":frontpage_link.href, "html":frontpage_link.innerHTML});
 				u.ce(logo, {"type":"link"});
+			}
+		}
+		page.initNavigation = function() {
+			this.nN.list = u.qs("ul.navigation", this.nN);
+			this.hN.initialHeight = page.hN.offsetHeight;
+			this.bn_nav = u.qs(".servicenavigation li.navigation", this.hN);
+			if(this.bn_nav) {
+				u.ae(this.bn_nav, "div");
+				u.ae(this.bn_nav, "div");
+				u.ae(this.bn_nav, "div");
+				u.ce(this.bn_nav);
+				this.bn_nav.clicked = function(event) {
+					if(this.is_open) {
+						this.is_open = false;
+						u.rc(this, "open");
+						u.ass(page.hN, {
+							"height":page.hN.initialHeight + "px"
+						})
+						u.ass(page.nN, {
+							"display": "none"
+						});
+						u.ass(page.nN, {
+							"overflow-y":"hidden"
+						});
+						u.ass(page.parentNode, {
+							"overflow-y":"scroll"
+						});
+					}
+					else {
+						this.is_open = true;
+						u.ac(this, "open");
+						delete page.hN.transitioned;
+						u.ass(page.hN, {
+							"height": window.innerHeight+"px",
+						});
+						u.ass(page.nN, {
+							"height":(window.innerHeight - page.hN.service.offsetHeight) + "px"
+						});
+						u.ass(page.nN, {
+							"display": "block"
+						});
+						u.ass(page.nN, {
+							"overflow-y":"scroll"
+						});
+						u.ass(page.parentNode, {
+							"overflow-y":"hidden"
+						});
+					}
+				}
+			}
+			var i, node;
+			if(page.fN.service) {
+				nodes = u.qsa("li", page.fN.service);
+				for(i = 0; node = nodes[i]; i++) {
+					u.ae(page.nN.list, node);
+				}
+				page.fN.removeChild(page.fN.service);
+			}
+			if(page.hN.service) {
+				nodes = u.qsa("li:not(.navigation)", page.hN.service);
+				for(i = 0; node = nodes[i]; i++) {
+					u.ae(page.nN.list, node);
+				}
+			}
+			var i, node, nodes;
+			nodes = u.qsa("#navigation li,a.logo", page.hN);
+			for(i = 0; node = nodes[i]; i++) {
+				u.ce(node, {"type":"link"});
+			}
+			page.nN.nodes = u.qsa("li", page.nN.list);
+			if(page.hN.service) {
+				u.ass(page.hN.service, {
+					"opacity":1
+				});
 			}
 		}
 		page.ready();
