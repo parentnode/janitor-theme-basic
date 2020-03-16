@@ -3270,7 +3270,7 @@ Util.History = u.h = new function() {
 		return !location.hash ? this.getCleanUrl(location.href) : this.getCleanHash(location.hash);
 	}
 }
-Util.Objects = u.o = new Object();
+Util.Modules = u.o = new Object();
 Util.init = function(scope) {
 	var i, node, nodes, object;
 	scope = scope && scope.nodeName ? scope : document;
@@ -4473,7 +4473,7 @@ if(false && document.documentMode <= 10) {
 
 
 /*u-basics.js*/
-Util.Objects["collapseHeader"] = new function() {
+Util.Modules["collapseHeader"] = new function() {
 	this.init = function(div) {
 		u.bug("init collapseHeader");
 		u.ac(div, "togglable");
@@ -7225,7 +7225,7 @@ u.notifier = function(node) {
 
 /*i-page.js*/
 u.bug_console_only = true;
-Util.Objects["page"] = new function() {
+Util.Modules["page"] = new function() {
 	this.init = function(page) {
 		u.bug("init page:" + page)
 		window.page = page;
@@ -7447,7 +7447,7 @@ u.e.addDOMReadyEvent(u.init)
 
 
 /*i-scene.js*/
-Util.Objects["scene"] = new function() {
+Util.Modules["scene"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
 		}
@@ -7462,7 +7462,7 @@ Util.Objects["scene"] = new function() {
 }
 
 /*i-login.js*/
-Util.Objects["login"] = new function() {
+Util.Modules["login"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
 		}
@@ -7480,7 +7480,7 @@ Util.Objects["login"] = new function() {
 }
 
 /*i-default_list.js*/
-Util.Objects["defaultList"] = new function() {
+Util.Modules["defaultList"] = new function() {
 	this.init = function(div) {
 		u.bug("init defaultList:" + u.nodeId(div))
 		var i, node;
@@ -7682,7 +7682,7 @@ Util.Objects["defaultList"] = new function() {
 
 
 /*i-default_edit.js*/
-Util.Objects["defaultEdit"] = new function() {
+Util.Modules["defaultEdit"] = new function() {
 	this.init = function(div) {
 		div._item_id = u.cv(div, "item_id");
 		var form = u.qs("form", div);
@@ -7738,7 +7738,7 @@ Util.Objects["defaultEdit"] = new function() {
 }
 
 /*i-default_new.js*/
-Util.Objects["defaultNew"] = new function() {
+Util.Modules["defaultNew"] = new function() {
 	this.init = function(form) {
 		u.f.init(form);
 		if(form.actions["cancel"]) {
@@ -7769,7 +7769,7 @@ Util.Objects["defaultNew"] = new function() {
 }
 
 /*i-default_edit_status.js*/
-Util.Objects["defaultEditStatus"] = new function() {
+Util.Modules["defaultEditStatus"] = new function() {
 	this.init = function(node) {
 		node._item_id = u.cv(node, "item_id");
 		node.csrf_token = node.getAttribute("data-csrf-token");
@@ -7819,7 +7819,7 @@ Util.Objects["defaultEditStatus"] = new function() {
 }
 
 /*i-default_edit_actions.js*/
-Util.Objects["defaultEditActions"] = new function() {
+Util.Modules["defaultEditActions"] = new function() {
 	this.init = function(node) {
 		var bn_duplicate = u.qs("li.duplicate", node);
 		if(bn_duplicate) {
@@ -7830,7 +7830,7 @@ Util.Objects["defaultEditActions"] = new function() {
 		}
 	}
 }
-Util.Objects["oneButtonForm"] = new function() {
+Util.Modules["oneButtonForm"] = new function() {
 	this.init = function(node) {
 		if(!node.childNodes.length) {
 			var csrf_token = node.getAttribute("data-csrf-token");
@@ -7913,7 +7913,7 @@ Util.Objects["oneButtonForm"] = new function() {
 }
 
 /*i-default_tags.js*/
-Util.Objects["defaultTags"] = new function() {
+Util.Modules["defaultTags"] = new function() {
 	this.init = function(div) {
 		div._item_id = u.cv(div, "item_id");
 		div.csrf_token = div.getAttribute("data-csrf-token");
@@ -7946,7 +7946,7 @@ Util.Objects["defaultTags"] = new function() {
 
 
 /*i-default_media.js*/
-Util.Objects["addMedia"] = new function() {
+Util.Modules["addMedia"] = new function() {
 	this.init = function(div) {
 		div.form = u.qs("form.upload", div);
 		div.form.div = div;
@@ -8255,7 +8255,7 @@ Util.Objects["addMedia"] = new function() {
 		}
 	}
 }
-Util.Objects["deleteMedia"] = new function() {
+Util.Modules["deleteMedia"] = new function() {
 	this.init = function(form) {
 		u.f.init(form);
 		var bn_delete = u.qs("input.delete", form);
@@ -8304,7 +8304,7 @@ Util.Objects["deleteMedia"] = new function() {
 		}
 	}
 }
-Util.Objects["addMediaSingle"] = new function() {
+Util.Modules["addMediaSingle"] = new function() {
 	this.init = function(div) {
 		div.form = u.qs("form.upload", div);
 		div.form.div = div;
@@ -8522,7 +8522,7 @@ Util.Objects["addMediaSingle"] = new function() {
 }
 
 /*i-default_comments.js*/
-Util.Objects["defaultComments"] = new function() {
+Util.Modules["defaultComments"] = new function() {
 	this.init = function(div) {
 		div.item_id = u.cv(div, "item_id");
 		div.delete_comment_url = div.getAttribute("data-comment-delete");
@@ -8634,7 +8634,7 @@ Util.Objects["defaultComments"] = new function() {
 
 
 /*i-default_prices.js*/
-Util.Objects["defaultPrices"] = new function() {
+Util.Modules["defaultPrices"] = new function() {
 	this.init = function(div) {
 		div.item_id = u.cv(div, "item_id");
 		div.csrf_token = div.getAttribute("data-csrf-token");
@@ -8737,7 +8737,7 @@ Util.Objects["defaultPrices"] = new function() {
 
 
 /*i-default_subscriptionmethod.js*/
-Util.Objects["defaultSubscriptionmethod"] = new function() {
+Util.Modules["defaultSubscriptionmethod"] = new function() {
 	this.init = function(div) {
 		div.item_id = u.cv(div, "item_id");
 		div.csrf_token = div.getAttribute("data-csrf-token");
@@ -8786,7 +8786,7 @@ Util.Objects["defaultSubscriptionmethod"] = new function() {
 
 
 /*i-navigations.js*/
-Util.Objects["navigationNodes"] = new function() {
+Util.Modules["navigationNodes"] = new function() {
 	this.init = function(div) {
 		div.list = u.qs("ul.items", div);
 		if(div.list) {
@@ -8839,7 +8839,7 @@ Util.Objects["navigationNodes"] = new function() {
 		}
 	}
 }
-Util.Objects["newNavigationNode"] = new function() {
+Util.Modules["newNavigationNode"] = new function() {
 	this.init = function(form) {
 		u.f.init(form);
 		form.submitted = function(iN) {
@@ -8855,7 +8855,7 @@ Util.Objects["newNavigationNode"] = new function() {
 		}
 	}
 }
-Util.Objects["editNavigationNode"] = new function() {
+Util.Modules["editNavigationNode"] = new function() {
 	this.init = function(div) {
 		div._item_id = u.cv(div, "item_id");
 		var form = u.qs("form", div);
@@ -8878,7 +8878,7 @@ Util.Objects["editNavigationNode"] = new function() {
 }
 
 /*i-users.js*/
-Util.Objects["usernames"] = new function() {
+Util.Modules["usernames"] = new function() {
 	this.init = function(div) {
 		var form;
 		form = u.qs("form.email", div);
@@ -8917,7 +8917,7 @@ Util.Objects["usernames"] = new function() {
 		}
 	}
 }
-Util.Objects["password"] = new function() {
+Util.Modules["password"] = new function() {
 	this.init = function(div) {
 		var password_state = u.qs("div.password_state", div);
 		var new_password = u.qs("div.new_password", div);
@@ -8955,7 +8955,7 @@ Util.Objects["password"] = new function() {
 		}
 	}
 }
-Util.Objects["apitoken"] = new function() {
+Util.Modules["apitoken"] = new function() {
 	this.init = function(div) {
 		var token = u.qs("p.token", div);
 		var renew_form = u.qs("form.renew", div);
@@ -9001,7 +9001,7 @@ Util.Objects["apitoken"] = new function() {
 		}
 	}
 }
-Util.Objects["editAddress"] = new function() {
+Util.Modules["editAddress"] = new function() {
 	this.init = function(form) {
 		u.f.init(form);
 		form.actions["cancel"].clicked = function(event) {
@@ -9018,7 +9018,7 @@ Util.Objects["editAddress"] = new function() {
 		}
 	}
 }
-Util.Objects["newsletters"] = new function() {
+Util.Modules["newsletters"] = new function() {
 	this.init = function(div) {
 		var i, node;
 		div.newsletters = u.qsa("ul.newsletters > li", div);
@@ -9044,7 +9044,7 @@ Util.Objects["newsletters"] = new function() {
 		}
 	}
 }
-Util.Objects["accessEdit"] = new function() {
+Util.Modules["accessEdit"] = new function() {
 	this.init = function(div) {
 		div._item_id = u.cv(div, "item_id");
 		var form = u.qs("form", div);
@@ -9074,7 +9074,7 @@ Util.Objects["accessEdit"] = new function() {
 		}
 	}
 }
-Util.Objects["flushUserSession"] = new function() {
+Util.Modules["flushUserSession"] = new function() {
 	this.init = function(div) {
 		u.bug("div flushUserSession")
 		div.csrf_token = div.getAttribute("data-csrf-token");
@@ -9095,7 +9095,7 @@ Util.Objects["flushUserSession"] = new function() {
 		}
 	}
 }
-Util.Objects["newSubscription"] = new function() {
+Util.Modules["newSubscription"] = new function() {
 	this.init = function(form) {
 		u.f.init(form);
 		u.bug("init")
@@ -9121,7 +9121,7 @@ Util.Objects["newSubscription"] = new function() {
 
 
 /*i-shop.js*/
-Util.Objects["editDataSection"] = new function() {
+Util.Modules["editDataSection"] = new function() {
 	this.init = function(form) {
 		var header = u.qs("h2", form.parentNode);
 		var action = u.ae(header, "span", {"html":"edit"});
@@ -9157,7 +9157,7 @@ Util.Objects["editDataSection"] = new function() {
 		}
 	}
 }
-Util.Objects["newOrderFromCart"] = new function() {
+Util.Modules["newOrderFromCart"] = new function() {
 	this.init = function(div) {
 		var bn_convert = u.qs("li.convert", div);
 		if(bn_convert) {
@@ -9170,7 +9170,7 @@ Util.Objects["newOrderFromCart"] = new function() {
 		}
 	}
 }
-Util.Objects["cartItemsList"] = new function() {
+Util.Modules["cartItemsList"] = new function() {
 	this.init = function(div) {
 		u.bug("cartItemsList");
 		div.total_cart_price = u.qs("dd.total_cart_price");
@@ -9214,7 +9214,7 @@ Util.Objects["cartItemsList"] = new function() {
 		}
 	}
 }
-Util.Objects["orderItemsList"] = new function() {
+Util.Modules["orderItemsList"] = new function() {
 	this.init = function(div) {
 		u.bug("orderItemsList");
 		div.total_order_price = u.qs("dd.total_order_price");
@@ -9292,7 +9292,7 @@ Util.Objects["orderItemsList"] = new function() {
 		}
 	}
 }
-Util.Objects["defaultPayment"] = new function() {
+Util.Modules["defaultPayment"] = new function() {
 	this.init = function(form) {
 		u.bug("defaultPayment:" + u.nodeId(form));
 		u.f.init(form);
@@ -9318,7 +9318,7 @@ Util.Objects["defaultPayment"] = new function() {
 }
 
 /*i-system.js*/
-Util.Objects["cacheList"] = new function() {
+Util.Modules["cacheList"] = new function() {
 	this.init = function(div) {
 		u.bug("div cacheList")
 		div.csrf_token = div.getAttribute("data-csrf-token");
@@ -9357,7 +9357,7 @@ Util.Objects["cacheList"] = new function() {
 }
 
 /*i-profile.js*/
-Util.Objects["editProfile"] = new function() {
+Util.Modules["editProfile"] = new function() {
 	this.init = function(div) {
 		div._item_id = u.cv(div, "item_id");
 		var form = u.qs("form", div);
@@ -9377,7 +9377,7 @@ Util.Objects["editProfile"] = new function() {
 		}
 	}
 }
-Util.Objects["usernamesProfile"] = new function() {
+Util.Modules["usernamesProfile"] = new function() {
 	this.init = function(div) {
 		u.bug("init usernamesProfile")
 		var form;
@@ -9427,7 +9427,7 @@ Util.Objects["usernamesProfile"] = new function() {
 		}
 	}
 }
-Util.Objects["passwordProfile"] = new function() {
+Util.Modules["passwordProfile"] = new function() {
 	this.init = function(div) {
 		var password_state = u.qs("div.password_state", div);
 		var new_password = u.qs("div.new_password", div);
@@ -9464,7 +9464,7 @@ Util.Objects["passwordProfile"] = new function() {
 		}
 	}
 }
-Util.Objects["apitokenProfile"] = new function() {
+Util.Modules["apitokenProfile"] = new function() {
 	this.init = function(div) {
 		var token = u.qs("p.token", div);
 		var form = u.qs("form", div);
@@ -9486,7 +9486,7 @@ Util.Objects["apitokenProfile"] = new function() {
 		}
 	}
 }
-Util.Objects["addressProfile"] = new function() {
+Util.Modules["addressProfile"] = new function() {
 	this.init = function(form) {
 		u.f.init(form);
 		form.actions["cancel"].clicked = function(event) {
@@ -9505,7 +9505,7 @@ Util.Objects["addressProfile"] = new function() {
 		}
 	}
 }
-Util.Objects["newslettersProfile"] = new function() {
+Util.Modules["newslettersProfile"] = new function() {
 	this.init = function(div) {
 		var i, node;
 		div.newsletters = u.qsa("ul.newsletters > li", div);
@@ -9539,7 +9539,7 @@ Util.Objects["newslettersProfile"] = new function() {
 		}
 	}
 }
-Util.Objects["resetPassword"] = new function() {
+Util.Modules["resetPassword"] = new function() {
 	this.init = function(form) {
 		u.f.init(form);
 		form.submitted = function() {
@@ -9558,7 +9558,7 @@ Util.Objects["resetPassword"] = new function() {
 
 
 /*i-form.js*/
-Util.Objects["generic"] = new function() {
+Util.Modules["generic"] = new function() {
 	this.init = function(div) {
 	}
 }

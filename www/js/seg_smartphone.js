@@ -3268,7 +3268,7 @@ Util.History = u.h = new function() {
 		return !location.hash ? this.getCleanUrl(location.href) : this.getCleanHash(location.hash);
 	}
 }
-Util.Objects = u.o = new Object();
+Util.Modules = u.o = new Object();
 Util.init = function(scope) {
 	var i, node, nodes, object;
 	scope = scope && scope.nodeName ? scope : document;
@@ -4503,7 +4503,7 @@ if(u.ga_account) {
 
 
 /*i-page.js*/
-Util.Objects["page"] = new function() {
+Util.Modules["page"] = new function() {
 	this.init = function(page) {
 		page.hN = u.qs("#header");
 		page.cN = u.qs("#content", page);
@@ -4543,7 +4543,7 @@ u.e.addDOMReadyEvent(u.init);
 
 
 /*i-front.js*/
-Util.Objects["front"] = new function() {
+Util.Modules["front"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
 		}
@@ -4557,7 +4557,7 @@ Util.Objects["front"] = new function() {
 
 
 /*i-demo.js*/
-Util.Objects["demo"] = new function() {
+Util.Modules["demo"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
 		}
@@ -4571,7 +4571,7 @@ Util.Objects["demo"] = new function() {
 
 
 /*i-login.js*/
-Util.Objects["login"] = new function() {
+Util.Modules["login"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
 		}
