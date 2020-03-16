@@ -1,5 +1,5 @@
 /*
-asset-builder @ 2020-03-16 18:07:51
+asset-builder @ 2020-03-16 18:09:28
 */
 
 /*seg_desktop_include.css*/
@@ -216,7 +216,7 @@ div.field select {width: 381px; height: 33px; color: #333333; padding: 5px 3px 2
 div.field select option {padding: 5px 3px 2px 6px;}
 @media all and (-webkit-min-device-pixel-ratio:0) {
 	div.field select {width: 380px; height: 31px; padding: 2px 3px 2px 7px;
-		background: #ffffff url(../../../img/bg_icons.png) no-repeat 360px -977px;
+		background: #ffffff url(../assets/janitor/admin/img/bg_icons.png) no-repeat 360px -977px;
 		-webkit-appearance: none;
 	}
 }
@@ -255,7 +255,7 @@ div.field.files input[type=file] {opacity: 0; width: 360px; height: 49px; margin
 div.field.files label {color: #333333; font-size: 14px; display: block; position: absolute; width: 120px; left: 50%; padding: 1px 4px 3px; margin: 16px 0 0 -60px; text-align: center; border-radius: 6px; background: #dedede;}
 div.field.files ul.filelist {color: #333333; font-size: 14px; display: block; position: absolute; width: 120px; left: 50%; padding: 1px 4px 3px; margin: 16px 0 0 -60px; text-align: center; border-radius: 6px; background: #dedede;}
 div.field.files.loading label {display: none;}
-div.field.files.loading {background: transparent url(../../../img/gx_loader.gif) no-repeat center center;}
+div.field.files.loading {background: transparent url(../assets/janitor/admin/img/gx_loader.gif) no-repeat center center;}
 div.field.focus input,
 div.field.focus textarea {margin: 0;}
 div.field.focus select {padding: 4px 3px 1px 0px;}
@@ -279,7 +279,7 @@ div.field textarea.default,
 div.field .pseudolabel {color: #aaaaaa;}
 div.field .indicator {position: absolute; top: 4px; left: 455px; width: 25px; height: 25px;}
 div.field.required .indicator {
-	background: transparent url(../../../img/bg_icons.png) no-repeat 0 -292px;
+	background: transparent url(../assets/janitor/admin/img/bg_icons.png) no-repeat 0 -292px;
 }
 div.field.text.required .indicator {background-position: 0 -296px;}
 div.field.radiobuttons .indicator,
@@ -322,7 +322,7 @@ ul.actions a.button,
 #content ul.actions a.button {font-size: 14px; background-color: #dedede; color: #333333; border: none; cursor: pointer; border-radius: 3px;}
 .submitting input[type="submit"].button {
 	padding-left: 40px !important;
-	background-image: url(../../../img/gx_loader.gif);
+	background-image: url(../assets/janitor/admin/img/gx_loader.gif);
 	background-position: 11px 5px;
 	background-repeat: no-repeat;
 	background-size: 17px auto;
