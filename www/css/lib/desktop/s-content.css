@@ -74,18 +74,12 @@
 #content .scene div.image,
 #content .scene div.media {position: relative; z-index: 10;}
 #content .scene div.image img,
-#content .scene div.media img {margin: 0 50px 30px; width: 540px; border-radius: 5px; overflow: hidden;}
-#content .scene div.image p,
-#content .scene div.media p {margin-top: -27px; padding: 0 70px 33px; font-size: 0; display: none;}
-#content .scene div.image p a,
-#content .scene div.media p a {font-style: italic; font-size: 13px; line-height: 1.1em; color: #bbbbbb; cursor: default; text-decoration: none;}
-#content .scene div.image.loaded p,
-#content .scene div.media.loaded p {display: block;}
+#content .scene div.media img {margin: 0 50px 30px; width: 540px; overflow: hidden;}
 
 #content .scene div.vimeo,
 #content .scene div.youtube {position: relative; z-index: 1;}
 #content .scene div.vimeo iframe,
-#content .scene div.youtube iframe {margin: 0 50px 30px; width: 540px; border-radius: 5px; overflow: hidden;}
+#content .scene div.youtube iframe {margin: 0 50px 30px; width: 540px; overflow: hidden;}
 
 /* LOGIN */
 #content .scene.login form {padding-bottom: 20px;}
