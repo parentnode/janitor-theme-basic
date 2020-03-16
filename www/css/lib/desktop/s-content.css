@@ -75,6 +75,8 @@
 #content .scene div.media {position: relative; z-index: 10;}
 #content .scene div.image img,
 #content .scene div.media img {margin: 0 50px 30px; width: 540px; overflow: hidden;}
+#content .scene div.image p,
+#content .scene div.media p {margin-top: -27px; padding: 0 70px 33px; font-size: 0; display: none;}
 
 #content .scene div.vimeo,
 #content .scene div.youtube {position: relative; z-index: 1;}
