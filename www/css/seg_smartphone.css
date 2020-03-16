@@ -1,5 +1,5 @@
 /*
-asset-builder @ 2020-03-16 18:09:28
+asset-builder @ 2020-03-16 18:16:13
 */
 
 /*seg_smartphone_include.css*/
@@ -185,16 +185,10 @@ dd {display: block; vertical-align: top; font-size: 16px; line-height: 1.25em;}
 #content .scene div.media {padding: 0;}
 #content .scene div.image img,
 #content .scene div.media img {width: 100%; margin: 0 0 20px;}
-#content .scene div.image p,
-#content .scene div.media p {margin-top: -17px; padding: 2px 20px 23px; font-size: 0; display: none;}
-#content .scene div.image.loaded p,
-#content .scene div.media.loaded p {display: block;}
-#content .scene div.image p a,
-#content .scene div.media p a {font-style: italic; line-height: 1.1em; font-size: 12px; display: block; color: #bbbbbb;}
 #content .scene div.vimeo,
 #content .scene div.youtube {position: relative; z-index: 1;}
 #content .scene div.vimeo iframe,
-#content .scene div.youtube iframe {margin: 0 0 20px; width: 100%; border-radius: 5px; overflow: hidden;}
+#content .scene div.youtube iframe {margin: 0 0 20px; width: 100%; overflow: hidden;}
 #content .scene.login form {padding-bottom: 20px;}
 #content .scene form li.forgot {padding-top: 7px;}
 #content .scene form li.forgot a {padding: 0; display: inline-block; vertical-align: top;}

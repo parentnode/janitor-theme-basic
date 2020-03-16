@@ -1,5 +1,5 @@
 /*
-asset-builder @ 2020-03-16 18:09:28
+asset-builder @ 2020-03-16 18:16:13
 */
 
 /*seg_desktop_include.css*/
@@ -180,21 +180,11 @@ body > div.hint a {text-decoration: underline; display: inline-block; vertical-a
 #content .scene div.image,
 #content .scene div.media {position: relative; z-index: 10;}
 #content .scene div.image img,
-#content .scene div.media img {cursor: zoom-in; margin: 0 50px 30px; width: 540px; border-radius: 5px; overflow: hidden;}
-#content .scene div.image p,
-#content .scene div.media p {margin-top: -27px; padding: 0 70px 33px; font-size: 0; display: none;}
-#content .scene div.image p a,
-#content .scene div.media p a {font-style: italic; font-size: 13px; line-height: 1.1em; color: #bbbbbb; cursor: default; text-decoration: none;}
-#content .scene div.image.loaded p,
-#content .scene div.media.loaded p {display: block;}
-#content .scene div.image.fullsize,
-#content .scene div.media.fullsize {}
-#content .scene div.image.fullsize img,
-#content .scene div.media.fullsize img {cursor: zoom-out; margin: 0 0 30px; border-radius: 0;}
+#content .scene div.media img {margin: 0 50px 30px; width: 540px; overflow: hidden;}
 #content .scene div.vimeo,
 #content .scene div.youtube {position: relative; z-index: 1;}
 #content .scene div.vimeo iframe,
-#content .scene div.youtube iframe {margin: 0 50px 30px; width: 540px; border-radius: 5px; overflow: hidden;}
+#content .scene div.youtube iframe {margin: 0 50px 30px; width: 540px; overflow: hidden;}
 #content .scene.login form {padding-bottom: 20px;}
 #content .scene.login form li.forgot {padding: 7px 0 0;}
 #content .scene.login form li.forgot a {padding: 0; display: inline-block; vertical-align: top;}
