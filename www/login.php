@@ -21,6 +21,7 @@ if(is_array($action) && count($action)) {
 	if(count($action) == 1 && $action[0] == "forgot") {
 
 		$page->page(array(
+			"type" => "janitor",
 			"templates" => "pages/forgot_password.php"
 		));
 		exit();
@@ -29,6 +30,7 @@ if(is_array($action) && count($action)) {
 	else if(count($action) == 2 && $action[0] == "forgot" && $action[1] == "receipt") {
 
 		$page->page(array(
+			"type" => "janitor",
 			"templates" => "pages/forgot_password_receipt.php"
 		));
 		exit();
@@ -45,7 +47,7 @@ if(is_array($action) && count($action)) {
 		// could not create reset request
 		else {
 			message()->addMessage("Sorry, you cannot reset the password for the specified user!", array("type" => "error"));
-			header("Location: glemt");
+			header("Location: forgot");
 			exit();
 		}
 	}
@@ -53,6 +55,7 @@ if(is_array($action) && count($action)) {
 
 // plain login
 $page->page(array(
+	"type" => "janitor",
 	"templates" => "pages/login.php"
 ));
 
