@@ -20,19 +20,19 @@ if(is_array($action) && count($action)) {
 	// login/forgot
 	if(count($action) == 1 && $action[0] == "forgot") {
 
-		$page->page(array(
+		$page->page([
 			"type" => "janitor",
 			"templates" => "pages/forgot_password.php"
-		));
+		]);
 		exit();
 	}
 	// login/forgot/receipt
 	else if(count($action) == 2 && $action[0] == "forgot" && $action[1] == "receipt") {
 
-		$page->page(array(
+		$page->page([
 			"type" => "janitor",
 			"templates" => "pages/forgot_password_receipt.php"
-		));
+		]);
 		exit();
 	}
 	// login/requestReset
@@ -54,9 +54,9 @@ if(is_array($action) && count($action)) {
 }
 
 // plain login
-$page->page(array(
+$page->page([
 	"type" => "janitor",
 	"templates" => "pages/login.php"
-));
+]);
 
 ?>

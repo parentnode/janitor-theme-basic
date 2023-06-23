@@ -15,10 +15,9 @@ $page->pageTitle("Frontpage");
 
 
 
-$page->page(array(
+$page->page([
 	"templates" => "pages/front.php"
-	)
-);
+]);
 exit();
 
 

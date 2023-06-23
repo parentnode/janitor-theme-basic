@@ -17,10 +17,9 @@ $page->pageTitle("Demo");
 
 
 
-$page->page(array(
+$page->page([
 	"templates" => "pages/demo.php"
-	)
-);
+]);
 exit();
 
 

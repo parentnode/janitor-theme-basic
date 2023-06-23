@@ -21,9 +21,9 @@ $page->pageTitle("Posts");
 // /posts/#sindex#
 if(count($action) == 1) {
 
-	$page->page(array(
+	$page->page([
 		"templates" => "pages/post.php"
-	));
+	]);
 	exit();
 
 }
@@ -31,17 +31,17 @@ if(count($action) == 1) {
 // /posts/tag/#tag#/#sindex#
 else if(count($action) >= 2 && $action[0] == "tag") {
 
-	$page->page(array(
+	$page->page([
 		"templates" => "pages/posts_tag.php"
-	));
+	]);
 	exit();
 
 }
 
 
-$page->page(array(
+$page->page([
 	"templates" => "pages/posts.php"
-));
+]);
 exit();
 
 

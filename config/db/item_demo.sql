@@ -3,8 +3,8 @@ CREATE TABLE `SITE_DB`.`item_demo` (
   `item_id` int(11) NOT NULL,
 
   `name` varchar(100) NOT NULL,
-  `v_text` text NOT NULL,
-  `v_html` text NOT NULL,
+  `v_text` text NOT NULL DEFAULT '',
+  `v_html` text NOT NULL DEFAULT '',
 
 
   PRIMARY KEY  (`id`),
