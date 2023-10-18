@@ -15,11 +15,15 @@
 		<ul class="servicenavigation">
 			<li class="terms"><a href="/terms">Terms</a></li>
 		</ul>
-
-		<p><a href="http://parentnode.dk">&lt;aliens&gt;we are all&lt;/aliens&gt;</a></p>
 	</div>
 
 </div>
+
+<? if(session()->value("dev")) { ?>
+	<script type="text/javascript" src="/js/lib/seg_<?= $this->segment() ?>_include.js"></script>
+<? } else { ?>
+	<script type="text/javascript" src="/js/seg_<?= $this->segment() ?>.js?rev=20231004-181004"></script>
+<? } ?>
 
 </body>
 </html>

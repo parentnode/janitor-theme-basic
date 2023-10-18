@@ -1,6 +1,4 @@
-Copyright 2006-2017 Martin Kaestel Nielsen, http://think.dk, http://parentnode.dk (janitor-theme-minimal)
-
-Copyright 2013 jQuery Foundation and other contributors (Sizzle JS selector engine)
+Copyright 2006-2023 Martin Kaestel Nielsen, https://think.dk, https://parentnode.dk (janitor-theme-basic)
 
 
 Permission is hereby granted, free of charge, to any person obtaining
